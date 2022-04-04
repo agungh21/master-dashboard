@@ -121,6 +121,12 @@ form.sign-up-form {
     font-weight: 500;
 }
 
+.invalid-feedback {
+    text-align: right;
+    color: #F38F84;
+    font-size: 0.9rem;
+}
+
 .btn {
     width: 150px;
     height: 49px;
