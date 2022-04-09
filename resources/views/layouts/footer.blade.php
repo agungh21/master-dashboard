@@ -1,3 +1,6 @@
+<?php
+$umum = $settings['umum'];
+?>
 <!-- Control Sidebar -->
 <aside class="control-sidebar control-sidebar-dark">
     <!-- Control sidebar content goes here -->
@@ -15,6 +18,6 @@
     </div>
     <!-- Default to the left -->
     <i class="fas fa-tools text-primary"></i>
-    Created By <a class="text-primary" href="https://adiva.co.id"><strong>PT. Adiva Sumber Solusi.</strong></a>
+    Created By <a class="text-primary" href="https://adiva.co.id"><strong>{{ $umum['creator_app'] }}.</strong></a>
 </footer>
 </div>

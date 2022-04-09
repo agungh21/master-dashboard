@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\User;
+use App\Models\Setting;
 use App\MyClass\Validations;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -19,8 +20,10 @@ class AdminController extends Controller
     // -------------
     public function index()
     {
+        $settings = Setting::getSettingCommon();
         return view('admin.index', [
             'title' => 'Dashboard',
+            'settings' => $settings,
         ]);
     }
 
@@ -134,6 +137,50 @@ class AdminController extends Controller
             DB::commit();
 
             return \Res::delete();
+        } catch (\Exception $e) {
+            DB::rollback();
+
+            return \Res::error($e);
+        }
+    }
+
+    // ---------------
+    // Pengaturan Umum
+    // ---------------
+    public function settingCommonIndex()
+    {
+        $title = "Umum";
+        $settings = Setting::getSettingCommon();
+
+        return view('admin.setting.common', [
+            'title'            => $title,
+            'settings'         => $settings,
+            'breadcrumbs' => [
+                [
+                    'title' => "Dashboard",
+                    'link'  => route('admin'),
+                ],
+                [
+                    'title' => $title,
+                    'link'  => route('admin.setting.common'),
+                ],
+            ],
+        ]);
+    }
+
+    public function settingCommonStore(Request $request)
+    {
+
+        DB::beginTransaction();
+
+        try {
+            $requestAll = $request->all();
+
+            Setting::commonStore($requestAll);
+
+            DB::commit();
+
+            return \Res::save();
         } catch (\Exception $e) {
             DB::rollback();
 

@@ -43,4 +43,13 @@ Route::prefix('admin')->group(function () {
         Route::put('{user}/update', 'AdminController@userUpdate')->name('admin.user.update');
         Route::delete('{user}/destroy', 'AdminController@userDestroy')->name('admin.user.destroy');
     });
+
+    // Setting
+    Route::prefix('pengaturan')->group(function () {
+        Route::get('umum', 'AdminController@settingCommonIndex')->name('admin.setting.common');
+
+        Route::group(['middleware' => 'requestAjax'], function () {
+            Route::post('common/store', 'AdminController@settingCommonStore')->name('admin.setting.common.store');
+        });
+    });
 });
