@@ -12,14 +12,16 @@
     <link rel="stylesheet" href="{{ asset('vendors/font-awesome/all.css') }}">
 
     <!-- css -->
-    <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('vendors/bootstrap/all.css') }}">
+
+    <link rel="stylesheet" href="{{ asset('assets/css/signin.css') }}">
 </head>
 
 <body>
     @yield('content')
 </body>
 <!-- javascript -->
-<script type="text/javascript" src="{{ asset('assets/js/main.js') }}"></script>
+<link rel="stylesheet" href="{{ asset('vendors/bootstrap/all.js') }}">
 <script type="text/javascript" src="{{ asset('vendors/font-awesome/all.js') }}"></script>
 
 </html>

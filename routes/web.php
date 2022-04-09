@@ -15,7 +15,32 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::redirect('/', '/login');
+Route::get('/daftar', 'Controller@daftar')->name('daftar');
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+
+// Route::get('/home', 'HomeController@index')->name('home');
+
+Route::prefix('admin')->group(function () {
+
+    // ----------
+    // Dashboard
+    // ----------
+    Route::get('/', 'AdminController@index')->name('admin');
+
+    //  -----
+    //  user
+    //  -----
+    Route::prefix('user')->group(function () {
+
+        Route::get('/', 'AdminController@userIndex')->name('admin.user');
+        Route::get('/add', 'AdminController@userAdd')->name('admin.user.add');
+        Route::get('{user}/edit', 'AdminController@userEdit')->name('admin.user.edit');
+        Route::get('/detail', 'AdminController@useDetail')->name('admin.user.detail');
+
+        Route::post('store', 'AdminController@userStore')->name('admin.user.store');
+        Route::put('{user}/update', 'AdminController@userUpdate')->name('admin.user.update');
+        Route::delete('{user}/destroy', 'AdminController@userDestroy')->name('admin.user.destroy');
+    });
+});
