@@ -108,7 +108,6 @@ class User extends Authenticatable
                 return $data->roleHtml();
             })
 
-
             ->rawColumns(['action', 'role'])
             ->make(true);
     }
