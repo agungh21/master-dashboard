@@ -32,18 +32,22 @@ class AdminController extends Controller
     // -------------
     public function userIndex(Request $request)
     {
+        $settings = Setting::getSettingCommon();
         if ($request->ajax()) {
             return User::dt();
         }
         return view('admin.user.index', [
             'title' => 'User',
+            'settings' => $settings,
         ]);
     }
 
     public function userAdd()
     {
+        $settings = Setting::getSettingCommon();
         return view('admin.user.add', [
             'title'            => 'User',
+            'settings' => $settings,
             'breadcrumbs'      => [
                 [
                     'title'    => 'Dashboard',
@@ -92,9 +96,11 @@ class AdminController extends Controller
 
     public function userEdit(User $user)
     {
+        $settings = Setting::getSettingCommon();
         return view('admin.user.edit', [
             'title' => 'Edit User',
             'user' => $user,
+            'settings' => $settings,
             'breadcrumbs'   => [
                 [
                     'title' => "Dashboard",

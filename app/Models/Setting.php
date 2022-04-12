@@ -74,7 +74,7 @@ class Setting extends Model
 
     public static function commonStore(array $request)
     {
-        // Update Bank Transfer
+        // Update Umum
         $umum = $request['umum'];
         self::updateSetting('umum', serialize($umum));
     }
