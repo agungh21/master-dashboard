@@ -22,7 +22,7 @@ Auth::routes();
 
 // Route::get('/home', 'HomeController@index')->name('home');
 
-Route::prefix('admin')->group(function () {
+Route::prefix('admin')->middleware('is_admin')->group(function () {
 
     // ----------
     // Dashboard
@@ -52,4 +52,8 @@ Route::prefix('admin')->group(function () {
             Route::post('common/store', 'AdminController@settingCommonStore')->name('admin.setting.common.store');
         });
     });
+});
+
+Route::prefix('users')->group(function () {
+    Route::get('/', 'UserController@indexUsers')->name('users');
 });

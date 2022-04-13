@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use App\Providers\RouteServiceProvider;
@@ -27,17 +28,26 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = RouteServiceProvider::HOME;
+    // protected $redirectTo = RouteServiceProvider::HOME;
+    public function login(Request $request)
+    {
+        $input = $request->all();
+        $this->validate($request, [
+            'email' => 'required|email',
+            'password' => 'required',
+        ]);
 
-    // public function redirectTo()
-    // {
-    //     if (Auth::user()->role === 1) {
-    //         dd(Auth::user());
-    //         return $redirectTo = '/login';
-    //     } else {
-    //         return $redirectTo = '/admin';
-    //     }
-    // }
+        if (auth()->attempt(array('email' => $input['email'], 'password' => $input['password']))) {
+            if (auth()->user()->role == 2) {
+                return redirect()->route('admin');
+            } else {
+                return redirect()->route('users');
+            }
+        } else {
+            return redirect()->route('login')
+                ->with('error', 'Email-Address And Password Are Wrong.');
+        }
+    }
     /**
      * Create a new controller instance.
      *

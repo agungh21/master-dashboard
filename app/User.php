@@ -74,6 +74,16 @@ class User extends Authenticatable
         }
     }
 
+    public function isAdmin()
+    {
+        return $this->role === "admin";
+    }
+
+    public function isUser()
+    {
+        return $this->role === "user";
+    }
+
     public static function dt()
     {
         $data = self::where('created_at', '!=', NULL)->orderBy('created_at', 'desc');
